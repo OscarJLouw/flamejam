@@ -15,6 +15,6 @@ RUN apk add --no-cache build-base make python3-dev git libffi-dev postgresql-dev
 # Clean the repo just in case the repo that built this Docker container wasn't
 # tidy.
 COPY . /app
-RUN git clean -dfx
+# RUN git clean -dfx
 EXPOSE 8080
 ENTRYPOINT ["/bin/sh", "-c", "FLASK_APP=app.py flask seed-db && uwsgi deploy/uwsgi.ini"]
