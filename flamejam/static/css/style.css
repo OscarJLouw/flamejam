@@ -125,6 +125,18 @@ ul {
     vertical-align: middle;
 }
 
+@media (min-width: 768px) {
+  .navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+  }
+}
+
+.navbar-bgj {
+	background-color: #da5f5f;
+}
+
 .searchBar {
 	display: inline;
 	line-height: 2;
