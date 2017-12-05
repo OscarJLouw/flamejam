@@ -1,5 +1,5 @@
 @import url("flags.css");
-@import url("bootstrap.css");
+@import url("bootstrap.min.css");
 
 .modal {
     color: #000;
@@ -13,23 +13,30 @@
 
 body {
     color: #555;
-    background: #FFF;
+    background-color: #eccb84;
     font-family: "DejaVu Sans", Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-width: 700px;
     font-size: 9pt;
 }
 
 a {
     color: #BC312C;
-    color: #0145AB;
     text-decoration: none;
 }
 
 a:hover {
     color: #AAA;
     text-decoration: underline;
+}
+
+#content {
+	width:100%;
+	max-width:1280px;
+	background-color: white;
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	margin: auto;
+	padding: 2em;
 }
 
 #content h1 {
@@ -81,15 +88,9 @@ ul {
 }
 
 #header {
-    height: 50px;
-    line-height: 50px;
-    background: #ABCDEF;
-    background-image: linear-gradient(to right,
-        rgba(255, 255, 255, 0.15) 0%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0.00) 50%,
-        rgba(255, 255, 255, 0.00) 100%);
-    background-size: 32px 32px;
+    height: 60px;
+    line-height: 60px;
+    background: #da5f5f;
 }
 
 #footer {
@@ -105,6 +106,7 @@ ul {
 }
 
 #main-title {
+	display: inline;
     font-size: 13pt;
     font-weight: bold;
 }
@@ -115,12 +117,17 @@ ul {
 }
 
 #logo {
-    width: 32px;
-    height: 32px;
+    width: 320px;
+    height: 42px;
     margin-right: 10px;
     background: url("../gfx/logo.png");
     display: inline-block;
     vertical-align: middle;
+}
+
+.searchBar {
+	display: inline;
+	line-height: 2;
 }
 
 .top-navigation {
@@ -155,10 +162,9 @@ img {
 }
 
 #navigation {
+	color:white;
     height: 40px;
-    background: #EEE;
-    border-top: 1px solid #ABCDEF;
-    border-bottom: 1px solid #DDD;
+    background: #a64848;
     text-align: center;
     margin-bottom: 20px;
     line-height: 42px;
@@ -179,6 +185,7 @@ img {
 }
 
 #navigation a {
+	color: white;
     text-decoration: none;
 }
 
@@ -206,8 +213,12 @@ img {
     font-size: 18pt;
 }
 
-.padding {
-    margin: 0 80px;
+.page-width {
+    width:100%;
+	max-width:1280px;
+	margin: auto;
+	
+	
 }
 
 * {
@@ -311,7 +322,6 @@ ol.steps {
 
 ol.steps li a span {
     position: absolute;
-    top: 50%;
     left: 0.2em;
     margin-top: -0.25em;
     font-size: 1.5em;
@@ -450,10 +460,10 @@ label {
 
 form.block .field > label {
     width: 100px;
-    display: inline-block;
+    display: inherit;
     text-align: right;
     margin-right: 10px;
-    color: #555;
+    color: #a64848;
     vertical-align: top;
     margin-top: 7px;
 }
@@ -473,6 +483,7 @@ p.form-buttons {
 }
 
 form {
+	display: inherit;
     margin: 0;
 }
 

@@ -1,14 +1,134 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}{% endblock %} « BaconGameJam</title>
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+		
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="{{ url_for('home') }}">
+						<img alt="BaconGameJam" src="{{ url_for('static', filename = 'gfx/logo.png') }}"></img>
+					</a>
+				</div>
 
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<form class="navbar-form navbar-center" role="search" action="{{ url_for('search') }}">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search jams, games, users, ...">
+						</div>
+						<button type="submit" class="btn btn-default">Search</button>
+					</form>
+					
+					<ul class="nav navbar-nav navbar-right">
+						<li><button type="button" class="btn btn-default navbar-btn">Login</button></li>
+						<li><button type="button" class="btn btn-default navbar-btn">Register</button></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+		
+        <div id="header">
+		
+            <div class="row page-width">
+                <div class="top-navigation">
+                    {% if current_user.is_anonymous %}
+                        <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+						<a href="{{ url_for('login') }}" class="btn btn-register">Register</a>
+                    {% else %}
+                        {% if current_user.invitiation %}
+                            <a href="{{ url_for('invitations') }}" class="btn btn-small">{{ current_user.invitation | length }} <i class="icon-envelope"></i></a>
+                        {% endif %}
+                        <a href="{{ url_for('profile') }}" class="btn btn-small" id="account">
+                            <img class="avatar" src="{{ current_user.get_avatar(16) }}" width="16" height="16" />
+                            {{ current_user.username }}
+                        </a>
+                        <a class="btn btn-small" href="{{ url_for('logout') }}"><i class="icon-off"></i></a><
+                    {% endif %}
+
+                </div>
+
+                <div id="main-title">
+                    <a href="{{ url_for('home') }}">
+                        <div id="logo" title="BaconGameJam"></div>
+                    </a>
+                </div>
+				
+				<div class="searchBar">
+                    <form action="{{ url_for('search') }}">
+                        <input class="text search" type="text" placeholder="Search jams, games, users, ..." name="q" />
+                    </form>
+                </div>
+				
+            </div>
+        </div>
+        <div id="navigation">
+		
+			
+            <div class="page-width">
+				<a class="btn" href="{{ url_for('jams') }}">Jams</a>
+				<a class="btn" href="{{ url_for('rules') }}">Rules</a>
+				<a class="btn" href="{{ url_for('faq') }}">Help</a>
+				<a class="btn" href="{{ url_for('subreddit') }}">r/bacongamejam</a>
+				<a class="btn" href="{{ url_for('contact') }}#irc">IRC</a>
+				<a class="btn" href="{{ url_for('statistics') }}">Stats</a>
+				<a class="btn" href="{{ url_for('map') }}">Map</a>
+                
+
+                <div class="left">
+                    {% block menu %}
+                        {% if current_jam %}
+                            {% if current_jam.get_status().code <= 1 %}
+                                Next jam is
+                                <b>{{ current_jam.get_link() }}</b>
+                                {{ current_jam.start_time | humantime }}
+                            {% elif current_jam.get_status().code == 2 %}
+                                Currently running jam is
+                                <b>{{ current_jam.get_link() }}</b>
+                                ending {{ current_jam.end_time | humantime }}
+                            {% else %}
+                                <b>{{ current_jam.get_link() }}</b>
+                                has finished
+                            {% endif %}
+                        {% endif %}
+                    {% endblock %}
+                </div>
+
+                <div class="center">
+                    {% block  center %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div id="content" class="page-width">
+
+            {% for category, message in get_flashed_messages(with_categories = True) %}
+                <div class="alert alert-{{ category if category and category != 'message' else 'info' }}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% block content %}
+                 NO CONTENT!
+            {% endblock %}
+        </div>
+        <div id="footer">
+            {% include "footer.html" %}
+        </div>
+		
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/button.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/jquery.lightbox-0.5.css') }}">
-        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <!--<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>-->
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.0.0.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.lightbox-0.5.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/countdown.js') }}"></script>
 
@@ -28,96 +148,5 @@
                 });
             });
         </script>
-        {% block head %}{% endblock %}
-    </head>
-    <body>
-        <div id="header">
-            <div class="padding">
-                <div class="top-navigation">
-                    <div class="btn-group">
-                        <a class="btn btn-mini" href="{{ url_for('jams') }}">Jams</a>
-                        <a class="btn btn-mini" href="{{ url_for('rules') }}">Rules</a>
-                        <a class="btn btn-mini" href="{{ url_for('faq') }}">Help</a>
-                        <a class="btn btn-mini" href="{{ url_for('subreddit') }}">r/bacongamejam</a>
-                        <a class="btn btn-mini" href="{{ url_for('contact') }}#irc">IRC</a>
-                        <a class="btn btn-mini" href="{{ url_for('statistics') }}">Stats</a>
-                        <a class="btn btn-mini" href="{{ url_for('map') }}">Map</a>
-                    </div>
-
-                    <div class="btn-group">
-                    {% if current_user.is_anonymous %}
-                        <a href="{{ url_for('login') }}" class="btn btn-small">Login / Signup</a>
-                    {% else %}
-                        {% if current_user.invitiation %}
-                            <a href="{{ url_for('invitations') }}" class="btn btn-small">{{ current_user.invitation | length }} <i class="icon-envelope"></i></a>
-                        {% endif %}
-                        <a href="{{ url_for('profile') }}" class="btn btn-small" id="account">
-                            <img class="avatar" src="{{ current_user.getAvatar(16) }}" width="16" height="16" />
-                            {{ current_user.username }}
-                        </a>
-                        <a class="btn btn-small" href="{{ url_for('logout') }}"><i class="icon-off"></i></a><
-                    {% endif %}
-                    </div>
-                </div>
-
-                <div id="main-title">
-                    <a href="{{ url_for('home') }}">
-                        <div id="logo"></div>
-                        BaconGameJam
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div id="navigation">
-            <div class="padding">
-                <div class="right">
-                    <form action="{{ url_for('search') }}">
-                        <input class="text search" type="text" placeholder="Search..." name="q" />
-                    </form>
-                </div>
-
-                <div class="left">
-                    {% block menu %}
-                        {% if current_jam %}
-                            {% if current_jam.getStatus().code <= 1 %}
-                                Next jam is
-                                <b>{{ current_jam.getLink() }}</b>
-                                {{ current_jam.start_time | humantime }}
-                            {% elif current_jam.getStatus().code == 2 %}
-                                Currently running jam is
-                                <b>{{ current_jam.getLink() }}</b>
-                                ending {{ current_jam.end_time | humantime }}
-                            {% else %}
-                                <b>{{ current_jam.getLink() }}</b>
-                                has finished
-                            {% endif %}
-                        {% endif %}
-                    {% endblock %}
-                </div>
-
-                <div class="center">
-                    {% block  center %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
-        <div id="content">
-            <div class="padding">
-
-            {% for category, message in get_flashed_messages(with_categories = True) %}
-                <div class="alert alert-{{ category if category and category != 'message' else 'info' }}">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-
-            {% block content %}
-                 NO CONTENT!
-            {% endblock %}
-            </div>
-        </div>
-        <div id="footer">
-            {% include "footer.html" %}
-        </div>
     </body>
 </html>
