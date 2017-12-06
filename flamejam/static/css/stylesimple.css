@@ -1,0 +1,111 @@
+@import url("bootstrap.min.css");
+
+/*** COLORS ***/
+/* Beige: 		#eccb84 */
+/* Red:  		#da5f5f	*/
+/* Dark Red:  	#a64848	*/
+/* Link Red: 	#bc312c */
+/* Grey: 		#555555 */
+
+/*** SHADOWS ***/
+/*	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);	*/
+
+body {
+    color: #555;
+    background-color: #eccb84;
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+a, a:visited{
+    color: #bc312c;
+    text-decoration: none;
+}
+
+a:hover, a:active, a:focus {
+    color: #a64848;
+    text-decoration: underline;
+}
+
+.titlebar-padding {
+    padding-top: 8px !important;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+	text-align: center;
+	margin-bottom: 1em;
+	height: 100px;
+}
+
+.navbar-brand {
+	padding: 0;
+	height: 60px;
+}
+
+.titlebar-bgj {
+	background-color: #da5f5f;
+	color: white;
+}
+
+.navMenu {
+	text-transform: uppercase;
+	background-color: #a64848;
+	color: white;
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	margin-bottom: 20px;
+}
+
+.navMenu a {
+	color: rgba(255,255,255,0.7);
+}
+.navMenu a:hover, .navMenu a:visited, .navMenu a:active, .navMenu a:focus {
+	color: white;
+	background-color: transparent !important;
+	border-radius: 0px;
+	box-shadow: none !important;
+}
+
+.mainContent {
+	background-color: white;
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+}
+
+.btn-login, .btn-login:visited {
+	text-transform: uppercase;
+	border-radius: 0px;
+	color: white;
+	border: 1px solid white;
+	background-color: transparent !important;
+	transition: background-color 0.1s;
+	margin-right: 1em;
+}
+
+.btn-login:hover, .btn-login:active, .btn-login:focus{
+	background-color: white !important;
+	color: #a64848;
+	box-shadow: none !important;
+}
+
+.btn-register, .btn-register:visited {
+	text-transform: uppercase;
+	border-radius: 0px;
+	background-color: white !important;
+	color: #a64848;
+	transition: background-color 0.1s;
+}
+
+.btn-register:hover, .btn-register:active, .btn-register:focus {
+	color: white;
+	border: 1px solid white;
+	background-color: transparent !important;
+	box-shadow: none !important;
+}
+
+.navbar-nav>li>a {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
