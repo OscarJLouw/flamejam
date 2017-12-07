@@ -21,30 +21,27 @@
 					</a>
 				
 					<div class="navbar-left titlebar-padding">
-						
-						{% block menu %}
-							{% if current_jam %}
-								{% if current_jam.get_status().code <= 1 %}
-									Next jam is
-									<b>{{ current_jam.get_link() }}</b>
-									{{ current_jam.start_time | humantime }}
-								{% elif current_jam.get_status().code == 2 %}
-									<b>{{ current_jam.get_link() }}</b>
-									<div class="mini-countdown" time="{{ current_jam.end_time }}">
-										<div class="time">ending {{ (current_jam.end_time - current_datetime) | countdowndelta }}</div>
-									</div>
-								{% else %}
-									<b>{{ current_jam.get_link() }}</b>
-									has finished
-								{% endif %}
-							
+						{% if current_jam %}
+							{% if current_jam.get_status().code <= 1 %}
+								Next jam is
+								<b>{{ current_jam.get_link() }}</b>
+								{{ current_jam.start_time | humantime }}
+							{% elif current_jam.get_status().code == 2 %}
+								<b>{{ current_jam.get_link() }}</b>
+								<div class="mini-countdown" time="{{ current_jam.end_time }}">
+									<div class="time">ending {{ (current_jam.end_time - current_datetime) | countdowndelta }}</div>
+								</div>
+							{% else %}
+								<b>{{ current_jam.get_link() }}</b>
+								has finished
 							{% endif %}
-						{% endblock %}
+						
+						{% endif %}
 					</div>
 					
 				</div>
 
-				<div class="collapse navbar-collapse" id="myNavbar">
+				<div class="">
 
 					<ul class="nav navbar-nav navbar-right titlebar-padding">
 					
@@ -59,7 +56,7 @@
 						<li><img class="avatar" src="{{ current_user.get_avatar(16) }}" width="16" height="16" /></li>
 						{{ current_user.username }}
 						</a>
-						<li><a class="btn btn-small" href="{{ url_for('logout') }}"><i class="icon-off"></i></a></li>
+						<li><a class="btn btn-small" href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i></a></li>
 						{% endif %}
 					</ul>
 				</div><!-- /.navbar-collapse -->
@@ -70,8 +67,8 @@
             <div class="container">
 				<div class="row">
 					<div class="collapse navbar-collapse">
-						<div class="col-md-8 align-left">
-							<ul class="nav navbar-nav navbar-left">
+						<div class="navbar-left">
+							<ul class="nav navbar-nav">
 								<li><a class="btn" href="{{ url_for('jams') }}"><i class="fa fa-trophy"></i> Jams</a></li>
 								<li><a class="btn" href="{{ url_for('rules') }}"><i class="fa fa-book"></i> Rules</a></li>
 								<li><a class="btn" href="{{ url_for('faq') }}"><i class="fa fa-question"></i> Help</a></li>
@@ -79,19 +76,17 @@
 								<li><a class="btn" href="{{ url_for('contact') }}#irc"><i class="fa fa-comments"></i> IRC</a></li>
 								<li><a class="btn" href="{{ url_for('statistics') }}"><i class="fa fa-bar-chart"></i> Stats</a></li>
 								<li><a class="btn" href="{{ url_for('map') }}"><i class="fa fa-map"></i> Map</a></li>
+								<li>
+									<form class="navbar-form" action="{{ url_for('search') }}">
+										<div class="left-inner-addon">
+											<i class="fa fa-search"></i>
+											<div class="input-group">
+												<input id="searchBar" type="text" class="form-control" placeholder="Search jams, games, users, ..." name="q">
+											</div>
+										</div>
+									</form>
+								</li>
 							</ul>
-						</div>
-						<div class="col-md-4 align-right">
-							<form class="navbar-form navbar-right" action="{{ url_for('search') }}">
-							  <div class="input-group">
-								<input type="text" class="form-control" placeholder="Search jams, games, users, ..." name="q">
-								<div class="input-group-btn">
-								  <button class="btn btn-default" type="submit">
-									<i class="fa fa-search"></i>
-								  </button>
-								</div>
-							  </div>
-							</form>
 						</div>
 					</div>
 				</div>
@@ -104,7 +99,12 @@
                     {{ message }}
                 </div>
             {% endfor %}
+			
 
+			{% block menu %}
+			
+			{% endblock %}
+			
             {% block content %}
                  NO CONTENT!
             {% endblock %}
