@@ -92,15 +92,15 @@
 				</div>
             </div>
         </div>
+		
+		{% for category, message in get_flashed_messages(with_categories = True) %}
+			<div class="container alert alert-{{ category if category and category != 'message' else 'info' }}">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{ message }}
+			</div>
+		{% endfor %}
+	
         <div class="mainContent container">
-            {% for category, message in get_flashed_messages(with_categories = True) %}
-                <div class="alert alert-{{ category if category and category != 'message' else 'info' }}">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-			
-
 			{% block menu %}
 			
 			{% endblock %}

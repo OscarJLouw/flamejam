@@ -73,7 +73,7 @@ a:hover, a:active, a:focus {
 }
 
 .left-inner-addon i {
-	z-index: 3;
+	z-index: 4;
 	color: #555;
     position: absolute;
     left: 0px;
@@ -81,15 +81,21 @@ a:hover, a:active, a:focus {
     pointer-events: none;
 }
 
-.form-control{
-	padding: 6px 30px;
+.form-control {
+	padding: 6px 0px;
+	padding-left: 35px;
+}
+
+.form-control:focus {
+	padding-right: 20px;
 }
 
 input[type=text] {
-    width: 40px !important;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+    width: 38px !important;
+    -webkit-transition: width 0.4s ease-in-out, padding 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out, padding 0.4s ease-in-out;
 }
+
 
 /* When the input field gets focus, change its width to 100% */
 input[type=text]:focus {
@@ -124,6 +130,9 @@ input[type=text]:focus {
 	box-shadow: none !important;
 }
 .navbar-form {
+	margin-top: 4px !important;
+	margin-bottom: 0px !important;
+	
 	padding: 0px !important;
 	border: none !important;
 	box-shadow: none !important;
