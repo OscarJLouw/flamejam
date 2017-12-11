@@ -129,17 +129,52 @@ a:hover, a:active, a:focus {
 	height:60px;
 }
 
-.navbar-countdown, .navbar-countdown:visited{
+.navbar-countdown {
 	height: 100%;
-	background-color: #5cb85c;
-	padding: 1em;
 	color:white;
 	text-decoration: none;
 }
-.navbar-countdown:hover, .navbar-countdown:active, .navbar-countdown:focus{
-	text-decoration: none;
+
+/* CLOCK */
+.navbar-countdown .navbar-clock, .navbar-countdown:visited .navbar-clock {
+	height: 100%;
+	padding: 1em;
+	
 	color:white;
+	background-color: #5cb85c;
+	border: 1px solid #398439;
+	transition: background-color 0.1s;
+}
+.navbar-countdown:hover .navbar-clock, .navbar-countdown:active .navbar-clock, .navbar-countdown:focus .navbar-clock {
 	background-color: #449d44;
+}
+
+/* NEXTJAM TITLE */
+.navbar-countdown .navbar-nextjam, .navbar-countdown:visited .navbar-nextjam {
+	height: 100%;
+	padding: 1em;
+	margin-left: 2rem;
+	
+	color: #a64848;
+	background-color: white;
+	border: 1px solid white;
+	transition: background-color 0.1s;
+}
+.navbar-countdown:hover .navbar-nextjam, .navbar-countdown:active .navbar-nextjam, .navbar-countdown:focus .navbar-nextjam {
+	color: white;
+	background-color: transparent;
+}
+
+.timeSubtitle{
+	color: rgba(255,255,255,0.5);
+	font-size: 0.5em;
+}
+.timeWithSubtitle{
+	float: left;
+	text-align: center;
+	background-color: rgba(255,255,255,0.2);
+	margin: 0 0.2em;
+    padding: 0.4em;
 }
 
 .titlebar-bgj {

@@ -19,27 +19,50 @@
 					<a class="navbar-brand" href="{{ url_for('home') }}">
 						<img alt="BaconGameJam" src="{{ url_for('static', filename = 'gfx/collapsedtitleimgwhite.png') }}"></img>
 					</a>
-					{% if current_jam %}
-
-					<a class="navbar-countdown navbar-left titlebar-padding" href="{{ current_jam.url() }}">
-						{% if current_jam.get_status().code <= 1 %}
-							Next jam is
-							<b>{{ current_jam.title }}</b>
-							{{ current_jam.start_time | humantime }}
-						{% elif current_jam.get_status().code == 2 %}
-								<span>Now Running:</span>
-								<div class="jamTitle">{{ current_jam.title }}</div>
-								<span>Ends In:</span>
-								<div class="mini-countdown" time="{{ current_jam.end_time }}">
-									<div class="time">{{ (current_jam.end_time - current_datetime) | countdowndelta }}</div>
-								</div>
-								<span>DAYS : HRS : MINS : SECS</span>
-						{% else %}
-							<b>{{ current_jam.get_link() }}</b>
-							has finished
-						{% endif %}
-					</a>
+					{% if current_jam.start_time > current_datetime %}
+						{% set time = current_jam.start_time %}
+						{% set text = "STARTS IN: " %}
+					{% elif current_jam.end_time <= current_datetime %}
+						{% set time = current_jam.end_time %}
+						{% set text = "HAS FINISHED!" %}
+					{% else %}
+						{% set time = current_jam.end_time %}
+						{% set text = "NOW RUNNING! ENDS IN: " %}
 					{% endif %}
+					
+					<a class="navbar-countdown" href="{{ current_jam.url() }}">
+						<div class="navbar-nextjam navbar-left titlebar-padding" href="{{ current_jam.url() }}">
+							<div class="text">{{ current_jam.title }}</div>
+							<div class="text">{{ text }}</div>
+						</div>
+						
+						<div class="navbar-clock navbar-left titlebar-padding">
+							<div class="countdown" time="{{ time }}">
+								
+								<div class="time">
+									<div class="timeWithSubtitle">
+										<div class="time-d"></div>
+										<div class="timeSubtitle">days</div>
+									</div>
+									
+									<div class="timeWithSubtitle">
+										<div class="time-h"></div>
+										<div class="timeSubtitle">hours</div>
+									</div>
+									
+									<div class="timeWithSubtitle">
+										<div class="time-m"></div>
+										<div class="timeSubtitle">mins</div>
+									</div>
+									
+									<div class="timeWithSubtitle">
+										<div class="time-s"></div>
+										<div class="timeSubtitle">secs</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
 				</div>
 
 				<div class="">
