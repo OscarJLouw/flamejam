@@ -16,29 +16,30 @@
 						<i class="fa fa-bars" aria-hidden="true"></i>                     
 					</button>
 					
-					<a class="navbar-brand titlebar-padding" href="{{ url_for('home') }}">
-						<img alt="BaconGameJam" src="{{ url_for('static', filename = 'gfx/logo.png') }}"></img>
+					<a class="navbar-brand" href="{{ url_for('home') }}">
+						<img alt="BaconGameJam" src="{{ url_for('static', filename = 'gfx/collapsedtitleimgwhite.png') }}"></img>
 					</a>
-				
-					<div class="navbar-left titlebar-padding">
-						{% if current_jam %}
-							{% if current_jam.get_status().code <= 1 %}
-								Next jam is
-								<b>{{ current_jam.get_link() }}</b>
-								{{ current_jam.start_time | humantime }}
-							{% elif current_jam.get_status().code == 2 %}
-								<b>{{ current_jam.get_link() }}</b>
+					{% if current_jam %}
+
+					<a class="navbar-countdown navbar-left titlebar-padding" href="{{ current_jam.url() }}">
+						{% if current_jam.get_status().code <= 1 %}
+							Next jam is
+							<b>{{ current_jam.title }}</b>
+							{{ current_jam.start_time | humantime }}
+						{% elif current_jam.get_status().code == 2 %}
+								<span>Now Running:</span>
+								<div class="jamTitle">{{ current_jam.title }}</div>
+								<span>Ends In:</span>
 								<div class="mini-countdown" time="{{ current_jam.end_time }}">
-									<div class="time">ending {{ (current_jam.end_time - current_datetime) | countdowndelta }}</div>
+									<div class="time">{{ (current_jam.end_time - current_datetime) | countdowndelta }}</div>
 								</div>
-							{% else %}
-								<b>{{ current_jam.get_link() }}</b>
-								has finished
-							{% endif %}
-						
+								<span>DAYS : HRS : MINS : SECS</span>
+						{% else %}
+							<b>{{ current_jam.get_link() }}</b>
+							has finished
 						{% endif %}
-					</div>
-					
+					</a>
+					{% endif %}
 				</div>
 
 				<div class="">
