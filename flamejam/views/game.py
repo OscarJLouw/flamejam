@@ -26,7 +26,7 @@ def create_game(jam_slug):
 
     r = current_user.get_participation(jam)
     if not r or not r.team:
-        flash("You cannot create a game without participating in the jam.", category="error")
+        flash("You must sign up to participate in the jam before creating a game!", category="error")
         return redirect(jam.url())
     if r.team.game:
         flash("You already have a game.")
@@ -173,7 +173,7 @@ def rate_game(jam_slug, game_id):
 
     # Allow only users who participate in this jam to vote.
     if current_user not in jam.participants:
-        flash("You cannot rate on this game. Only participants are eligible for vote.", "error")
+        flash("You cannot rate on this game. Only jam participants are able to vote.", "error")
         return redirect(url_for("jam_games", jam_slug=jam.slug))
 
     rating = Rating.query.filter_by(game_id=game.id, user_id=current_user.id).first()

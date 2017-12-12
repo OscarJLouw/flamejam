@@ -53,9 +53,14 @@ a:hover, a:active, a:focus {
     text-decoration: underline;
 }
 
+
+
 /*** HEADER ***/
 
 .titlebar-bgj {
+	-webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	-moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
 	background-color: #da5f5f;
 	color: white;
 }
@@ -80,8 +85,14 @@ a:hover, a:active, a:focus {
 /* Site logo */
 
 .navbar-brand {
-	padding: 0;
+	padding: 0px;
 	height: 60px;
+}
+
+.navbar-brand>img {
+  height: 100% !important;
+  padding: 5px;
+  width: auto;
 }
 
 .navbar-brand-mobile {
@@ -143,6 +154,8 @@ a:hover, a:active, a:focus {
 	background-color: #5cb85c !important;
 	border: 1px solid #449d44;
 	color: white;
+	-webkit-transition: background-color 0.1s ease-in-out;
+	-moz-transition: background-color 0.1s ease-in-out;
 	transition: background-color 0.1s ease-in-out;
 	padding: 10px;
 }
@@ -150,6 +163,8 @@ a:hover, a:active, a:focus {
 .btn-participate:hover, .btn-participate:active, .btn-participate:focus {
 	background-color: #449d44 !important;
 	border: 1px solid #398439;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 }
 
@@ -160,10 +175,97 @@ a:hover, a:active, a:focus {
 	float: right !important;
 }
 
+.btn-login, .btn-login:visited {
+	text-transform: uppercase;
+	border-radius: 0px;
+	color: white;
+	border: 1px solid white;
+	background-color: transparent !important;
+	-webkit-transition: background-color 0.1s;
+	-moz-transition: background-color 0.1s;
+	transition: background-color 0.1s;
+	margin-right: 1em;
+}
+
+.btn-login:hover, .btn-login:active, .btn-login:focus{
+	background-color: white !important;
+	color: #a64848;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.btn-register, .btn-register:visited {
+	text-transform: uppercase;
+	border-radius: 0px;
+	background-color: white !important;
+	color: #a64848;
+	-webkit-transition: background-color 0.1s;
+	-moz-transition: background-color 0.1s;
+	transition: background-color 0.1s;
+}
+
+.btn-register:hover, .btn-register:active, .btn-register:focus {
+	color: white;
+	border: 1px solid white;
+	background-color: transparent !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
 
 /*** NAVIGATION ***/
 
+.navbar-nav>li>a {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+.navbar-nav{
+	margin: auto;
+}
+
+.navMenu {
+	text-transform: uppercase;
+	background-color: #a64848;
+	color: white;
+	-webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	-moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	margin-bottom: 20px;
+}
+
+.navMenu a {
+	color: rgba(255,255,255,0.7);
+}
+.navMenu a:hover, .navMenu a:visited, .navMenu a:active, .navMenu a:focus {
+	color: white;
+	background-color: transparent !important;
+	border-radius: 0px;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.navbar-collapse {
+	border: none !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
 /* Search bar */
+
+.navbar-form {
+	margin-top: 4px !important;
+	margin-bottom: 0px !important;
+	padding: 0px !important;
+	border: none !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
 
 .mobileSearch{
 	display: block !important;
@@ -185,8 +287,9 @@ a:hover, a:active, a:focus {
 .searchBarExpand {
 	width: 38px !important;
 	background-color: rgba(255,255,255,0) !important;
-	-webkit-transition: width 0.4s ease-in-out, padding 0.4s ease-in-out, background-color 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out, padding 0.4s ease-in-out, background-color 0.4s ease-in-out;
+	-webkit-transition: width 0.4s ease-in-out, padding 0.4s ease-in-out, background-color 0.1s ease-in-out;
+	-moz-transition: width 0.4s ease-in-out, padding 0.4s ease-in-out, background-color 0.1s ease-in-out;
+    transition: width 0.4s ease-in-out, padding 0.4s ease-in-out, background-color 0.1s ease-in-out;
 	padding: 6px 0px;
 	cursor: pointer;
 }
@@ -203,6 +306,8 @@ a:hover, a:active, a:focus {
 	background-color: rgba(255,255,255,0.1);
 	padding: 6px 0px;
 	padding-left: 38px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
 	box-shadow: none;
 	border-radius: 0px;
 	caret-color: white;
@@ -242,6 +347,12 @@ a:hover, a:active, a:focus {
 
 /*** MAIN CONTENT STYLES ***/
 
+.mainContent {
+	background-color: white;
+	-webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	-moz-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
+}
 
 /*** FOOTER ***/
 
@@ -261,87 +372,11 @@ a:hover, a:active, a:focus {
 
 
 
-.navMenu {
-	text-transform: uppercase;
-	background-color: #a64848;
-	color: white;
-	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
-	margin-bottom: 20px;
-}
 
-.navMenu a {
-	color: rgba(255,255,255,0.7);
-}
-.navMenu a:hover, .navMenu a:visited, .navMenu a:active, .navMenu a:focus {
-	color: white;
-	background-color: transparent !important;
-	border-radius: 0px;
-	box-shadow: none !important;
-}
 
-.navbar-collapse {
-	border: none !important;
-	box-shadow: none !important;
-	padding-right: 0px;
-	padding-left: 0px;
-}
-.navbar-form {
-	margin-top: 4px !important;
-	margin-bottom: 0px !important;
-	
-	padding: 0px !important;
-	border: none !important;
-	box-shadow: none !important;
-}
-.mainContent {
-	background-color: white;
-	box-shadow: 0 1px 4px 0 rgba(0,0,0,0.14);
-}
 
-.btn-login, .btn-login:visited {
-	text-transform: uppercase;
-	border-radius: 0px;
-	color: white;
-	border: 1px solid white;
-	background-color: transparent !important;
-	transition: background-color 0.1s;
-	margin-right: 1em;
-}
 
-.btn-login:hover, .btn-login:active, .btn-login:focus{
-	background-color: white !important;
-	color: #a64848;
-	box-shadow: none !important;
-}
 
-.btn-register, .btn-register:visited {
-	text-transform: uppercase;
-	border-radius: 0px;
-	background-color: white !important;
-	color: #a64848;
-	transition: background-color 0.1s;
-}
 
-.btn-register:hover, .btn-register:active, .btn-register:focus {
-	color: white;
-	border: 1px solid white;
-	background-color: transparent !important;
-	box-shadow: none !important;
-}
 
-.navbar-nav>li>a {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-}
-.navbar-nav{
-	margin: auto;
-}
 
-.navbar-brand {
-  padding: 0px;
-}
-.navbar-brand>img {
-  height: 100% !important;
-  padding: 5px;
-  width: auto;
-}

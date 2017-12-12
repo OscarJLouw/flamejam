@@ -25,10 +25,10 @@
 					<div class="navbar-countdown">
 						{% if current_jam.start_time > current_datetime %}
 							{% set time = current_jam.start_time %}
-							{% set text = "STARTS: " %}
+							{% set text = "NEXT JAM STARTS: " %}
 						{% elif current_jam.end_time <= current_datetime %}
 							{% set time = current_jam.end_time %}
-							{% set text = "over :(" %}
+							{% set text = "Next jam coming soon!" %}
 						{% else %}
 							{% set time = current_jam.end_time %}
 							{% set text = "ENDS: " %}
@@ -65,7 +65,7 @@
 							</div>
 						</div>
 							
-						<a href="{{ current_jam.url() }}" class="btn btn-participate">Participate</a>
+						<a href="{{ current_jam.url() }}" class="btn btn-participate">Details</a>
 					</div>
 		
 					
@@ -74,7 +74,7 @@
 							<li><a href="{{ url_for('login') }}" class="btn btn-login">Login</a></li>
 							<li><a href="{{ url_for('login') }}" class="btn btn-register">Register</a></li>
 						{% else %}
-							<ul class="nav navbar-nav navbar-account">
+							<ul class="nav navbar-account">
 							{% if current_user.invitiation %}
 								<li><a href="{{ url_for('invitations') }}" class="btn btn-small">{{ current_user.invitation | length }} <i class="icon-envelope"></i></a></li>
 							{% endif %}

@@ -46,7 +46,7 @@ def login():
         remember_me = login_form.remember_me.data
         user = User.query.filter(func.lower(User.username) == func.lower(username)).first()
         if login_user(user, remember_me):
-            flash("You were logged in.", "success")
+            flash("You have been logged in.", "success")
             if user.invitations.count():
                 markup = f'You have {user.invitations.count()} team invitations'
                 markup += f'- click <a href="{url_for("invitations")}">here</a> to view them.'
@@ -57,7 +57,7 @@ def login():
             identity_changed.send(current_app._get_current_object(),
                                   identity=Identity(user.id))
         else:
-            flash("Login failed, user not validated", "error")
+            flash("Login failed, user not validated. Check your email!", "error")
             return redirect(url_for("verify_status", username=username))
 
     elif register_form.validate_on_submit():
@@ -75,7 +75,7 @@ def login():
         db.session.add(new_user)
         db.session.commit()
 
-        flash("Your account has been created, confirm your email to verify.", "success")
+        flash("Your account has been created, check your email address for a link to verify your account.", "success")
         return redirect(url_for('verify_status', username=username))
     return render_template('account/login.html', login_form=login_form,
                            register_form=register_form)
@@ -85,7 +85,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash("You were logged out.", "success")
+    flash("You have been logged out.", "success")
 
     # Remove session keys set by Flask-Principal
     for key in ('identity.name', 'identity.auth_type'):
@@ -131,7 +131,7 @@ def reset_request():
         mail.send_message(subject=f"{app.config['LONG_NAME']}: Reset your password",
                           recipients=[user.email], body=body)
 
-        flash("Your password has been reset, check your email.", "success")
+        flash("Your password has been reset, please check your email.", "success")
     return render_template('account/reset_request.html', form=form, error=error)
 
 
@@ -143,7 +143,7 @@ def reset_verify(username, token):
         return redirect(url_for('index'))
     if user.getResetToken() != token:
         flash("This does not seem to be a valid reset link, if you reset your account multiple "
-              "times make sure you are using the link in the last email you received!", "error")
+              "times make sure you are using the link in the last email you received.", "error")
         return redirect(url_for('index'))
     form = NewPassword()
     error = None
@@ -153,7 +153,7 @@ def reset_verify(username, token):
         # set the new password
         user.password = hash_password(form.password.data)
         db.session.commit()
-        flash("Your password was updated and you can login with it now.", "success")
+        flash("Your password was updated, and can now be used to sign in.", "success")
         return redirect(url_for('login'))
     return render_template('account/reset_newpassword.html', user=user, form=form, error=error)
 
@@ -174,7 +174,7 @@ def verify_send():
     mail.send_message(subject=f"Welcome to {app.config['LONG_NAME']}, {username}",
                       recipients=[user.new_email], body=body)
 
-    flash("Verification has been resent, check your email", "success")
+    flash("Verification has been re-sent, please check your email", "success")
     return redirect(url_for('verify_status', username=username))
 
 

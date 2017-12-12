@@ -31,15 +31,15 @@ def jam_participate(jam_slug):
 
     if jam.get_status().code > JamStatusCode.PACKAGING:
         flash("You cannot register for participation in a jam after it has finished or "
-              "is in rating phase.", "error")
+              "entered rating phase.", "error")
         return redirect(jam.url())
 
     if jam.get_status().code < JamStatusCode.REGISTRATION:
-        flash("You cannot register for participation before the registration started.", "error")
+        flash("You cannot register for participation before the registration has opened.", "error")
         return redirect(jam.url())
 
     if user.get_participation(jam):
-        flash("You already participate in this jam.", "warning")
+        flash("You are already participating in '{jam.title}'.", "warning")
         return redirect(jam.url())
 
     form = ParticipateForm()
@@ -48,7 +48,7 @@ def jam_participate(jam_slug):
         user.join_jam(jam)
         user.get_participation(jam).show_in_finder = form.show_in_finder.data
         db.session.commit()
-        flash("You are now registered for this jam.", "success")
+        flash("You are now registered for '{jam.title}'!", "success")
         return redirect(jam.url())
 
     return render_template('jam/participate.html', jam=jam, form=form)
@@ -60,7 +60,7 @@ def jam_cancel_participation(jam_slug):
     jam = Jam.query.filter_by(slug=jam_slug).first_or_404()
 
     if jam.get_status().code > JamStatusCode.PACKAGING:
-        flash("You cannot unregister from a jam after it has finished or is in rating phase.",
+        flash("You cannot unregister from a jam after it has finished or has entered rating phase.",
               "error")
         return redirect(jam.url())
 
@@ -69,7 +69,7 @@ def jam_cancel_participation(jam_slug):
     if form.validate_on_submit():
         current_user.leave_jam(jam)
         db.session.commit()
-        flash("You are now unregistered from this jam.", "success")
+        flash("You are no longer registered for '{jam.title}'.", "success")
         return redirect(jam.url())
 
     return render_template('jam/cancel_participation.html', jam=jam, form=form)
