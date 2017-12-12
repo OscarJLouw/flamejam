@@ -12,12 +12,11 @@
 			<div class="container">
 				<div class="header-container-inner">
 					<div class="navbar-header">
-					
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-							<i class="fa fa-bars" aria-hidden="true"></i>                     
-						</button>
+						<a class="navbar-brand navbar-brand-mobile" href="{{ url_for('home') }}">
+							<img alt="BaconGameJam" src="{{ url_for('static', filename = 'gfx/narrowlogo.png') }}"></img>
+						</a>
 						
-						<a class="navbar-brand" href="{{ url_for('home') }}">
+						<a class="navbar-brand navbar-brand-desktop" href="{{ url_for('home') }}">
 							<img alt="BaconGameJam" src="{{ url_for('static', filename = 'gfx/widelogo.png') }}"></img>
 						</a>
 						
@@ -69,21 +68,27 @@
 						<a href="{{ current_jam.url() }}" class="btn btn-participate">Participate</a>
 					</div>
 		
-					<ul class="nav navbar-nav navbar-account">
+					
 						{% if current_user.is_anonymous %}
-						<li><a href="{{ url_for('login') }}" class="btn btn-login">Login</a></li>
-						<li><a href="{{ url_for('login') }}" class="btn btn-register">Register</a></li>
+							<ul class="nav navbar-account">
+							<li><a href="{{ url_for('login') }}" class="btn btn-login">Login</a></li>
+							<li><a href="{{ url_for('login') }}" class="btn btn-register">Register</a></li>
 						{% else %}
-						{% if current_user.invitiation %}
-						<li><a href="{{ url_for('invitations') }}" class="btn btn-small">{{ current_user.invitation | length }} <i class="icon-envelope"></i></a></li>
-						{% endif %}
-						<li><a href="{{ url_for('profile') }}" class="btn btn-login" id="account">
-						<img class="avatar" src="{{ current_user.get_avatar(16) }}" width="16" height="16" />
-						{{ current_user.username }}
-						</a></li>
-						<li><a class="btn btn-login" href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i></a></li>
+							<ul class="nav navbar-nav navbar-account">
+							{% if current_user.invitiation %}
+								<li><a href="{{ url_for('invitations') }}" class="btn btn-small">{{ current_user.invitation | length }} <i class="icon-envelope"></i></a></li>
+							{% endif %}
+							<li><a href="{{ url_for('profile') }}" class="btn btn-login" id="account">
+							<img class="avatar" src="{{ current_user.get_avatar(16) }}" width="16" height="16" />
+							{{ current_user.username }}
+							</a></li>
+							<li><a class="btn btn-login" href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i></a></li>
 						{% endif %}
 					</ul>
+					
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<i class="fa fa-bars" aria-hidden="true"></i>                     
+					</button>
 				</div>
 			</div>
 		</nav>
@@ -101,11 +106,19 @@
 								<li><a class="btn" href="{{ url_for('contact') }}#irc"><i class="fa fa-comments"></i> IRC</a></li>
 								<li><a class="btn" href="{{ url_for('statistics') }}"><i class="fa fa-bar-chart"></i> Stats</a></li>
 								<li><a class="btn" href="{{ url_for('map') }}"><i class="fa fa-map"></i> Map</a></li>
-								<li>
+								<li class="desktopSearch">
 									<form class="navbar-form" action="{{ url_for('search') }}">
 										<div class="left-inner-addon">
 											<i class="fa fa-search"></i>
-											<input id="mainSearchBar" type="text" class="form-control" placeholder="Search jams, games, users, ..." name="q">
+											<input type="text" class="form-control searchBarStyle searchBarExpand" placeholder="Search users, games, ..." name="q">
+										</div>
+									</form>
+								</li>
+								<li class="mobileSearch">
+									<form action="{{ url_for('search') }}">
+										<div class="left-inner-addon">
+											<i class="fa fa-search"></i>
+											<input class="form-control searchBarStyle" type="text" placeholder="Search jams, users, games, ..." name="q">
 										</div>
 									</form>
 								</li>
